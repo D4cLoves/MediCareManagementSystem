@@ -1,3 +1,4 @@
+using TestTask_Infrastructure.Data;
 namespace TestTask_API;
 
 public class Program
@@ -11,6 +12,8 @@ public class Program
 
         // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
         builder.Services.AddOpenApi();
+        
+        builder.Services.AddApplicationDbContext("Data Source=testtask.db");
 
         var app = builder.Build();
 
