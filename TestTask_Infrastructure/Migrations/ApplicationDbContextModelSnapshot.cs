@@ -66,6 +66,10 @@ namespace TestTask_Infrastructure.Migrations
                         .HasColumnType("TEXT")
                         .HasColumnName("Name");
 
+                    b.Property<string>("Specialty")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.HasKey("Id");
 
                     b.ToTable("Doctors");
