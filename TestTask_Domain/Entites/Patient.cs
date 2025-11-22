@@ -13,6 +13,7 @@ public class Patient
     
     public Patient(FullName name, DateTime birthDate, Guid doctorId)
     {
+        Id = Guid.NewGuid();
         Name = name;
         BirthDate = birthDate;
         DoctorId = doctorId;
