@@ -1,4 +1,11 @@
+using Microsoft.EntityFrameworkCore;
+using TestTask_Application.Services;
+using TestTask_Domain.Entites;
+using TestTask_Domain.Interfaces;
+using TestTask_Domain.ValueObject;
 using TestTask_Infrastructure.Data;
+using TestTask_Infrastructure.Repositories;
+
 namespace TestTask_API;
 
 public class Program
@@ -27,7 +34,16 @@ public class Program
             });
         });
 
+        builder.Services.AddScoped<IPatientRepository, PatientRepository>();
+        builder.Services.AddScoped<PatientRepository>();
+        builder.Services.AddScoped<IDieseasRepository, DiseaseRepository>();
+        builder.Services.AddScoped<DiseaseRepository>();
+        builder.Services.AddScoped<IDoctorRepository, DoctorRepository>();
+        builder.Services.AddScoped<DoctorRepository>();
         
+        builder.Services.AddScoped<PatientService>();
+        builder.Services.AddScoped<DiseaseService>();
+        builder.Services.AddScoped<DoctorService>();
 
         var app = builder.Build();
 
