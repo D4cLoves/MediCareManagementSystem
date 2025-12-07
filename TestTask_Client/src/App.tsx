@@ -11,34 +11,37 @@ const App: React.FC = () => {
 
     return (
         <div className="App">
-            <h1>Медицинская система</h1>
+            <header className="app-header">
+                <h1>MediCare Management System</h1>
+                <p className="app-subtitle">Medical Records Management Platform</p>
+            </header>
 
-            <div className="tabs">
+            <nav className="tabs">
                 <button
                     onClick={() => setActiveTab('patients')}
                     className={activeTab === 'patients' ? 'active' : ''}
                 >
-                    Пациенты
+                    Patients
                 </button>
                 <button
                     onClick={() => setActiveTab('doctors')}
                     className={activeTab === 'doctors' ? 'active' : ''}
                 >
-                    Доктора
+                    Doctors
                 </button>
                 <button
                     onClick={() => setActiveTab('diseases')}
                     className={activeTab === 'diseases' ? 'active' : ''}
                 >
-                    Болезни
+                    Diseases
                 </button>
-            </div>
+            </nav>
 
-            <div className="content">
+            <main className="content">
                 {activeTab === 'patients' && <PatientList />}
                 {activeTab === 'doctors' && <DoctorList />}
                 {activeTab === 'diseases' && <DiseaseList />}
-            </div>
+            </main>
         </div>
     );
 };

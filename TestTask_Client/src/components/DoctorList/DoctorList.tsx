@@ -15,35 +15,39 @@ const DoctorList: React.FC = () => {
 
     return (
         <div>
-            <h2>Поиск докторов по специальности</h2>
-            <div style={{ marginBottom: '20px' }}>
+            <h2>Doctor Directory</h2>
+            <div className="search-container">
                 <input
                     type="text"
                     value={specialty}
                     onChange={(e) => setSpecialty(e.target.value)}
-                    placeholder="Введите специальность"
-                    style={{ padding: '8px', marginRight: '10px', width: '300px' }}
+                    placeholder="Enter specialty (e.g., Therapist, Cardiologist)"
+                    onKeyPress={(e) => e.key === 'Enter' && searchDoctors()}
                 />
-                <button onClick={searchDoctors}>Найти</button>
+                <button className="primary" onClick={searchDoctors}>Search</button>
             </div>
 
-            {doctors.length > 0 && (
-                <table border={1} cellPadding="10" cellSpacing="0" style={{ width: '100%', borderCollapse: 'collapse' }}>
+            {doctors.length === 0 ? (
+                <div className="empty-state">
+                    <p>No doctors found. Enter a specialty to search.</p>
+                </div>
+            ) : (
+                <table>
                     <thead>
-                        <tr style={{ backgroundColor: '#f0f0f0' }}>
-                            <th>№</th>
-                            <th>ФИО</th>
-                            <th>Специальность</th>
-                            <th>Дата рождения</th>
+                        <tr>
+                            <th>#</th>
+                            <th>Full Name</th>
+                            <th>Specialty</th>
+                            <th>Date of Birth</th>
                         </tr>
                     </thead>
                     <tbody>
                         {doctors.map((doctor, index) => (
                             <tr key={doctor.id}>
                                 <td>{index + 1}</td>
-                                <td>{doctor.name.value || doctor.name.Value || 'Не указано'}</td>
+                                <td><strong>{doctor.name.value || doctor.name.Value || 'Not specified'}</strong></td>
                                 <td>{doctor.specialty}</td>
-                                <td>{new Date(doctor.birthDate).toLocaleDateString('ru-RU')}</td>
+                                <td>{new Date(doctor.birthDate).toLocaleDateString('en-US')}</td>
                             </tr>
                         ))}
                     </tbody>

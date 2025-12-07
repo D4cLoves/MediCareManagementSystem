@@ -10,16 +10,22 @@ namespace TestTask_API;
 
 public class Program
 {
-    public static void Main(string[] args)
+    public static async Task Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
+
+        builder.AddServiceDefaults();
 
         builder.Services.AddAuthorization();
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
         builder.Services.AddControllers();
         
-        builder.Services.AddApplicationDbContext("Data Source=testtask.db");
+        //builder.Services.AddApplicationDbContext("Data Source=testtask.db");
+        var connectionString = builder.Configuration.GetConnectionString("sqlitedb") 
+                               ?? "Data Source=testtask.db";
+        builder.Services.AddApplicationDbContext(connectionString);
+        
         
         builder.Services.AddCors(options =>
         {
@@ -47,6 +53,23 @@ public class Program
 
         var app = builder.Build();
 
+        // Seed database with test data
+        using (var scope = app.Services.CreateScope())
+        {
+            var services = scope.ServiceProvider;
+            try
+            {
+                var context = services.GetRequiredService<ApplicationDbContext>();
+                await context.Database.EnsureCreatedAsync();
+                await DbSeeder.SeedAsync(context);
+            }
+            catch (Exception ex)
+            {
+                var logger = services.GetRequiredService<ILogger<Program>>();
+                logger.LogError(ex, "An error occurred while seeding the database.");
+            }
+        }
+
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())
         {
@@ -60,6 +83,8 @@ public class Program
         
         app.MapControllers();
 
-        app.Run();
+        app.MapDefaultEndpoints();
+
+        await app.RunAsync();
     }
 }

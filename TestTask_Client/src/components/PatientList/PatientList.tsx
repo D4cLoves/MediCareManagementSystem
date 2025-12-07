@@ -33,7 +33,7 @@ const PatientList: React.FC = () => {
         const lastName = nameParts.slice(1).join(' ') || '';
 
         if (!firstName || !lastName) {
-            alert('Введите имя и фамилию');
+            alert('Please enter first and last name');
             return;
         }
 
@@ -42,53 +42,59 @@ const PatientList: React.FC = () => {
             await loadPatients();
             cancelEdit();
         } catch (error) {
-            alert('Ошибка обновления имени');
+            alert('Error updating name');
         }
     };
 
     return (
         <div>
-            <h2>Список пациентов</h2>
-            <table border={1} cellPadding="10" cellSpacing="0" style={{ width: '100%', borderCollapse: 'collapse' }}>
-                <thead>
-                    <tr style={{ backgroundColor: '#f0f0f0' }}>
-                        <th>№</th>
-                        <th>ФИО</th>
-                        <th>Дата рождения</th>
-                        <th>Действия</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {patients.map((patient, index) => (
-                        <tr key={patient.id}>
-                            <td>{index + 1}</td>
-                            <td>
-                                {editingId === patient.id ? (
-                                    <input
-                                        type="text"
-                                        value={newName}
-                                        onChange={(e) => setNewName(e.target.value)}
-                                        style={{ width: '200px', padding: '5px' }}
-                                    />
-                                ) : (
-                                    patient.name.value || patient.name.Value || 'Не указано'
-                                )}
-                            </td>
-                            <td>{new Date(patient.birthDate).toLocaleDateString('ru-RU')}</td>
-                            <td>
-                                {editingId === patient.id ? (
-                                    <>
-                                        <button onClick={() => saveEdit(patient.id)} style={{ marginRight: '5px' }}>Сохранить</button>
-                                        <button onClick={cancelEdit}>Отмена</button>
-                                    </>
-                                ) : (
-                                    <button onClick={() => startEdit(patient)}>Редактировать</button>
-                                )}
-                            </td>
+            <h2>Patient Registry</h2>
+            {patients.length === 0 ? (
+                <div className="empty-state">
+                    <p>No patients found</p>
+                </div>
+            ) : (
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Full Name</th>
+                            <th>Date of Birth</th>
+                            <th>Actions</th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {patients.map((patient, index) => (
+                            <tr key={patient.id}>
+                                <td>{index + 1}</td>
+                                <td>
+                                    {editingId === patient.id ? (
+                                        <input
+                                            type="text"
+                                            value={newName}
+                                            onChange={(e) => setNewName(e.target.value)}
+                                            style={{ width: '250px' }}
+                                        />
+                                    ) : (
+                                        patient.name.value || patient.name.Value || 'Not specified'
+                                    )}
+                                </td>
+                                <td>{new Date(patient.birthDate).toLocaleDateString('en-US')}</td>
+                                <td>
+                                    {editingId === patient.id ? (
+                                        <>
+                                            <button className="primary" onClick={() => saveEdit(patient.id)}>Save</button>
+                                            <button className="secondary" onClick={cancelEdit}>Cancel</button>
+                                        </>
+                                    ) : (
+                                        <button onClick={() => startEdit(patient)}>Edit</button>
+                                    )}
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            )}
         </div>
     );
 };
