@@ -8,159 +8,93 @@
 ![Entity Framework](https://img.shields.io/badge/EF%20Core-9.0-512BD4?style=for-the-badge&logo=dotnet&logoColor=white)
 ![SQLite](https://img.shields.io/badge/SQLite-003B57?style=for-the-badge&logo=sqlite&logoColor=white)
 
-**Современная система управления медицинскими записями с архитектурой Clean Architecture и DDD подходами**
+**Система управления медицинскими записями с чистой архитектурой**
 
-[Особенности](#-особенности) • [Технологии](#-технологии) • [Архитектура](#-архитектура) • [Установка](#-установка) • [Скриншоты](#-скриншоты)
+[Особенности](#-особенности) • [Технологии](#-технологии) • [Установка](#-установка) • [Скриншоты](#-скриншоты) • [Примеры кода](#-примеры-кода)
 
 </div>
 
 ---
 
-## 📋 Описание
+## 📋 О проекте
 
-MediCare Management System — это полнофункциональное веб-приложение для управления медицинскими записями, разработанное как тестовое задание. Система демонстрирует современные подходы к разработке enterprise-приложений с использованием Clean Architecture, Domain-Driven Design (DDD) и разделением на слои.
+Веб-приложение для управления медицинскими записями. Показывает как я умею строить приложения с правильной архитектурой — разделение на слои, работа с базой данных, REST API и современный фронтенд.
 
-### Основной функционал:
-- ✅ Управление пациентами (просмотр, редактирование)
-- ✅ Поиск докторов по специальности
-- ✅ Управление базой болезней
-- ✅ RESTful API с документацией Swagger
-- ✅ Современный React UI с TypeScript
+**Что умеет:**
+- Просмотр и редактирование пациентов
+- Поиск докторов по специальности
+- Справочник болезней
+- REST API с документацией Swagger
+- Современный интерфейс на React
 
 ---
 
 ## ✨ Особенности
 
-### 🏗️ Архитектура
-- **Clean Architecture** — четкое разделение на слои (Domain, Application, Infrastructure, API)
-- **Domain-Driven Design (DDD)** — использование Value Objects, Entities, Repository Pattern
-- **Dependency Injection** — полная поддержка DI через встроенный контейнер .NET
-- **Separation of Concerns** — каждый слой отвечает за свою область ответственности
+**Архитектура:**
+- Разделение на слои (Domain, Application, Infrastructure, API)
+- Использование Value Objects для валидации данных
+- Repository Pattern для работы с базой
+- Dependency Injection везде
 
-### 🔧 Backend
-- **ASP.NET Core 9.0** — современный фреймворк для создания API
-- **Entity Framework Core** — ORM для работы с базой данных
-- **SQLite** — легковесная база данных для разработки
-- **Swagger/OpenAPI** — автоматическая документация API
-- **CORS** — настроенная политика для работы с фронтендом
+**Backend:**
+- ASP.NET Core 9.0
+- Entity Framework Core с SQLite
+- Swagger для документации API
+- Автоматическое заполнение тестовыми данными
 
-### 🎨 Frontend
-- **React 19** — последняя версия React с улучшенной производительностью
-- **TypeScript** — типобезопасность на всех уровнях
-- **Vite** — быстрая сборка и hot module replacement
-- **Modern CSS** — чистый и современный дизайн
-
-### 📦 Паттерны проектирования
-- **Repository Pattern** — абстракция доступа к данным
-- **Service Layer** — бизнес-логика в отдельном слое
-- **Value Objects** — инкапсуляция бизнес-правил (FullName)
-- **Factory Pattern** — создание доменных объектов
+**Frontend:**
+- React 19 с TypeScript
+- Современный дизайн в стиле macOS
+- Компонентная архитектура
 
 ---
 
 ## 🛠️ Технологии
 
-### Backend Stack
-```
-📦 TestTask_API          - ASP.NET Core 9.0 Web API
-📦 TestTask_Application  - Бизнес-логика и сервисы
-📦 TestTask_Domain      - Доменные модели и интерфейсы
-📦 TestTask_Infrastructure - Реализация репозиториев и EF Core
-📦 TestTask_ServiceDefaults - Общие настройки сервисов
-```
+**Backend:**
+- ASP.NET Core 9.0
+- Entity Framework Core 9.0
+- SQLite
+- Swagger/OpenAPI
 
-**Основные пакеты:**
-- `Microsoft.AspNetCore.OpenApi` (9.0.11)
-- `Microsoft.EntityFrameworkCore` (9.0.11)
-- `Microsoft.EntityFrameworkCore.Sqlite` (9.0.11)
-- `Swashbuckle.AspNetCore` (9.0.6)
-
-### Frontend Stack
-```
-📦 React 19.2.0         - UI библиотека
-📦 TypeScript 5.9       - Типизированный JavaScript
-📦 Vite 7.2.4           - Сборщик и dev-сервер
-```
+**Frontend:**
+- React 19.2
+- TypeScript 5.9
+- Vite 7.2
 
 ---
 
 ## 🏛️ Архитектура
 
-```
-┌─────────────────────────────────────────────────────────┐
-│                    TestTask_Client                      │
-│              (React + TypeScript + Vite)                 │
-└────────────────────┬────────────────────────────────────┘
-                     │ HTTP/REST
-┌────────────────────▼────────────────────────────────────┐
-│                    TestTask_API                         │
-│           (ASP.NET Core 9.0 Controllers)                │
-└────────────────────┬────────────────────────────────────┘
-                     │
-┌────────────────────▼────────────────────────────────────┐
-│              TestTask_Application                       │
-│              (Services, Business Logic)                  │
-└────────────────────┬────────────────────────────────────┘
-                     │
-┌────────────────────▼────────────────────────────────────┐
-│                  TestTask_Domain                        │
-│        (Entities, Value Objects, Interfaces)            │
-└────────────────────┬────────────────────────────────────┘
-                     │
-┌────────────────────▼────────────────────────────────────┐
-│              TestTask_Infrastructure                    │
-│    (Repositories, DbContext, Data Access)               │
-└────────────────────┬────────────────────────────────────┘
-                     │
-┌────────────────────▼────────────────────────────────────┐
-│                    SQLite Database                      │
-└─────────────────────────────────────────────────────────┘
-```
+Проект разделен на слои:
 
-### Слои приложения:
+1. **Domain** — сущности (Patient, Doctor, Disease) и Value Objects (FullName)
+2. **Application** — бизнес-логика в сервисах
+3. **Infrastructure** — работа с базой данных через EF Core
+4. **API** — REST контроллеры
+5. **Client** — React приложение
 
-1. **Domain Layer** (`TestTask_Domain`)
-   - Доменные сущности: `Patient`, `Doctor`, `Disease`
-   - Value Objects: `FullName`
-   - Интерфейсы репозиториев: `IPatientRepository`, `IDoctorRepository`, `IDieseasRepository`
-
-2. **Application Layer** (`TestTask_Application`)
-   - Сервисы: `PatientService`, `DoctorService`, `DiseaseService`
-   - Бизнес-логика и оркестрация
-
-3. **Infrastructure Layer** (`TestTask_Infrastructure`)
-   - Реализация репозиториев
-   - `ApplicationDbContext` с настройками EF Core
-   - Миграции базы данных
-
-4. **API Layer** (`TestTask_API`)
-   - REST API контроллеры
-   - Настройка Swagger, CORS
-   - Dependency Injection
-
-5. **Client Layer** (`TestTask_Client`)
-   - React компоненты
-   - API клиент
-   - TypeScript типы
+Каждый слой знает только о том, что ему нужно, зависимости идут сверху вниз.
 
 ---
 
 ## 🚀 Установка
 
-### Требования
-- [.NET 9.0 SDK](https://dotnet.microsoft.com/download/dotnet/9.0)
-- [Node.js](https://nodejs.org/) (версия 18+)
-- [npm](https://www.npmjs.com/) или [yarn](https://yarnpkg.com/)
+**Требования:**
+- .NET 9.0 SDK
+- Node.js 18+
+- npm
 
-### Вариант 1: Запуск вручную (рекомендуется)
+**Запуск:**
 
-1. **Клонируйте репозиторий**
+1. Клонируйте репозиторий
 ```bash
 git clone https://github.com/D4cLoves/MediCareManagementSystem.git
 cd MediCareManagementSystem
 ```
 
-2. **Запустите Backend (API)**
+2. Запустите Backend
 ```bash
 cd TestTask_API
 dotnet restore
@@ -168,68 +102,58 @@ dotnet ef database update
 dotnet run
 ```
 
-3. **В отдельном терминале запустите Frontend**
+3. В другом терминале запустите Frontend
 ```bash
 cd TestTask_Client
 npm install
 npm run dev
 ```
 
-После запуска:
-- API будет доступен по адресу: `https://localhost:5119` или `http://localhost:5119`
-- Swagger UI: `https://localhost:5119/swagger`
-- Frontend будет доступен по адресу: `http://localhost:5173`
-- База данных автоматически заполнится тестовыми данными при первом запуске (8 докторов, 12 пациентов, 8 болезней)
+**Результат:**
+- API: `http://localhost:5119`
+- Swagger: `http://localhost:5119/swagger`
+- Frontend: `http://localhost:5173`
 
-### Вариант 2: Запуск через Aspire (опционально)
-
-Если хотите использовать Aspire Dashboard для мониторинга:
-
-```bash
-cd TestTask_AppHost
-dotnet restore
-dotnet run
-```
-
-> **⚠️ Примечание:** Frontend нужно запускать отдельно, так как Aspire может не найти npm в PATH.
+При первом запуске база автоматически заполнится тестовыми данными (8 докторов, 12 пациентов, 8 болезней).
 
 ---
 
 ## 📸 Скриншоты
 
-### 🖥️ Интерфейс приложения
+### Реестр пациентов
 
-#### Patient Registry
-![Patient Registry](screenshots/screenshot-patients.png)
+<div align="center">
+  <img src="screenshots/screenshot-patients.png" alt="Реестр пациентов" width="800"/>
+</div>
 
-The Patient Registry tab displays a comprehensive list of all patients in the system. Users can view patient information including full name and date of birth. The interface supports inline editing of patient names directly from the table.
+Список всех пациентов с возможностью редактирования имени прямо в таблице.
 
-#### Doctor Directory
-![Doctor Directory](screenshots/screenshot-doctors.png)
+### Поиск докторов
 
-The Doctor Directory provides a search functionality to find doctors by specialty. Users can enter a specialty (e.g., "Therapist", "Cardiologist") and view matching results with detailed information about each doctor.
+<div align="center">
+  <img src="screenshots/screenshot-doctors.png" alt="Поиск докторов" width="800"/>
+</div>
 
-#### Disease Registry
-![Disease Registry](screenshots/screenshot-diseases.png)
+Поиск докторов по специальности. Введите название специальности и получите список подходящих врачей.
 
-The Disease Registry contains a complete catalog of medical conditions with their descriptions. This reference database helps medical staff quickly access information about various diseases and their characteristics.
+### Справочник болезней
 
-### 💻 Примеры кода
+<div align="center">
+  <img src="screenshots/screenshot-diseases.png" alt="Справочник болезней" width="800"/>
+</div>
 
-Демонстрация чистоты, практичности и точности реализации архитектурных паттернов:
+Полный каталог болезней с описаниями для быстрого доступа к информации.
 
-#### Domain Layer - Value Object (FullName)
+---
+
+## 💻 Примеры кода
+
+### 1. Value Object — валидация на уровне домена
+
 ```csharp
-namespace TestTask_Domain.ValueObject;
-
 public class FullName
 {
     public string Value { get; }
-
-    public FullName(string value)
-    {
-        Value = value;
-    }
 
     public static FullName Create(string value)
     {
@@ -237,29 +161,31 @@ public class FullName
             throw new ArgumentException("ФИО не может быть пустым");
 
         var trimmed = value.Trim();
-        
         if (trimmed.Length < 2)
             throw new ArgumentException("Слишком короткое имя");
 
         return new FullName(trimmed);
     }
-    
-    public override string ToString() => Value;
 }
 ```
 
-#### Domain Layer - Entity (Patient)
-```csharp
-namespace TestTask_Domain.Entites;
+**Что это дает:**
+- Валидация данных в одном месте — нельзя создать невалидное ФИО
+- Бизнес-правила инкапсулированы в доменной модели
+- Невозможно случайно передать пустую строку вместо имени
 
+---
+
+### 2. Entity с инкапсуляцией — защита данных
+
+```csharp
 public class Patient 
 {
     public Guid Id { get; private set; }
     public FullName Name { get; private set; }
     public DateTime BirthDate { get; private set; }
-    public Guid DoctorId { get; private set; }
 
-    private Patient(){}
+    private Patient(){} // Для EF Core
     
     public Patient(FullName name, DateTime birthDate, Guid doctorId)
     {
@@ -269,71 +195,38 @@ public class Patient
         DoctorId = doctorId;
     }
     
-    public void UpdateName(FullName NewName) => Name = NewName;
-    public void UpdateBirthDate(DateTime NewBirthDate) => BirthDate = NewBirthDate;
+    public void UpdateName(FullName newName) => Name = newName;
 }
 ```
 
-#### Application Layer - Service
+**Что это дает:**
+- Приватные сеттеры — нельзя изменить данные напрямую, только через методы
+- Конструктор гарантирует, что объект создается с валидными данными
+- Методы обновления контролируют изменения состояния
+
+---
+
+### 3. EF Core конфигурация — Value Object в базе
+
 ```csharp
-namespace TestTask_Application.Services;
-
-public class PatientService 
-{
-    private readonly PatientRepository _patientRepository;
-    
-    public PatientService(PatientRepository patientRepository)
-    {
-        _patientRepository = patientRepository;
-    }
-
-    public async Task<List<Patient>> GetPatients()
-    {
-        return await _patientRepository.GetPatients();
-    }
-    
-    public async Task UpdatePatientNameAsync(Guid id, string newName)
-    {
-        var newFullName = FullName.Create(newName);
-        await _patientRepository.UpdatePatientNameAsync(id, newFullName);
-    }
-}
+modelBuilder.Entity<Patient>()
+    .Property(p => p.Name)
+    .HasConversion(
+        v => v.Value,              // Как сохранить в БД
+        v => FullName.Create(v))   // Как загрузить из БД
+    .IsRequired();
 ```
 
-#### Infrastructure Layer - Repository
+**Что это дает:**
+- Value Object автоматически конвертируется в строку при сохранении
+- При загрузке автоматически создается валидный объект FullName
+- База хранит простую строку, код работает с объектом
+
+---
+
+### 4. REST API контроллер — чистая архитектура
+
 ```csharp
-namespace TestTask_Infrastructure.Repositories;
-
-public class PatientRepository : IPatientRepository
-{
-    private readonly ApplicationDbContext _context;
-    
-    public PatientRepository(ApplicationDbContext context)
-    {
-        _context = context;
-    }
-    
-    public async Task<List<Patient>> GetPatients()
-    {
-        return await _context.Patients.ToListAsync();
-    }
-
-    public async Task UpdatePatientNameAsync(Guid id, FullName newName)
-    {
-        var patient = await _context.Patients.FirstOrDefaultAsync(p => p.Id == id);
-        if (patient != null)
-        {
-            patient.UpdateName(newName);
-            await _context.SaveChangesAsync();
-        }
-    }
-}
-```
-
-#### API Layer - Controller
-```csharp
-namespace TestTask_API.Controllers;
-
 [ApiController]
 [Route("api/patients")]
 public class PatientController : ControllerBase
@@ -349,26 +242,21 @@ public class PatientController : ControllerBase
     public async Task<ActionResult<List<Patient>>> GetPatients()
     {
         var patients = await _patientService.GetPatients();
-        if (patients == null || !patients.Any())
-            return NotFound("Пациенты не найдены");
         return Ok(patients);
-    }
-
-    [HttpPatch("{id}/name")]
-    public async Task<IActionResult> UpdatePatientName(Guid id, [FromBody] string newName)
-    {
-        await _patientService.UpdatePatientNameAsync(id, newName);
-        return NoContent();
     }
 }
 ```
 
-#### Frontend - React Component
-```typescript
-import React, { useState, useEffect } from 'react';
-import { type Patient } from "../../types";
-import { api } from "../../services/api.ts";
+**Что это дает:**
+- Контроллер только принимает запросы и возвращает ответы
+- Вся бизнес-логика в сервисе — легко тестировать и менять
+- Dependency Injection через конструктор — зависимости явные
 
+---
+
+### 5. React компонент — TypeScript и хуки
+
+```typescript
 const PatientList: React.FC = () => {
     const [patients, setPatients] = useState<Patient[]>([]);
     const [editingId, setEditingId] = useState<string | null>(null);
@@ -382,56 +270,19 @@ const PatientList: React.FC = () => {
         setPatients(data);
     };
 
-    const saveEdit = async (id: string) => {
-        const nameParts = newName.trim().split(' ');
-        const firstName = nameParts[0] || '';
-        const lastName = nameParts.slice(1).join(' ') || '';
-
-        if (!firstName || !lastName) {
-            alert('Введите имя и фамилию');
-            return;
-        }
-
-        try {
-            await api.updatePatientName(id, firstName, lastName);
-            await loadPatients();
-            cancelEdit();
-        } catch (error) {
-            alert('Ошибка обновления имени');
-        }
-    };
-
     return (
         <div>
-            <h2>Список пациентов</h2>
-            {/* UI компоненты */}
+            <h2>Patient Registry</h2>
+            {/* ... */}
         </div>
     );
 };
 ```
 
-#### Infrastructure - DbContext Configuration
-```csharp
-protected override void OnModelCreating(ModelBuilder modelBuilder)
-{
-    modelBuilder.Entity<Patient>()
-        .Property(p => p.Name)
-        .HasConversion(
-            v => v.Value,
-            v => FullName.Create(v))
-        .HasColumnName("Name")
-        .HasMaxLength(100)
-        .IsRequired();
-    
-    modelBuilder.Entity<Patient>()
-        .HasOne<Doctor>()
-        .WithMany()
-        .HasForeignKey(p => p.DoctorId)
-        .OnDelete(DeleteBehavior.Restrict);
-}
-```
-
----
+**Что это дает:**
+- TypeScript гарантирует типобезопасность — ошибки видны на этапе разработки
+- React хуки для управления состоянием — современный подход
+- Асинхронные операции через async/await — читаемый код
 
 ---
 
@@ -439,108 +290,49 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 
 ```
 TestTask/
-├── TestTask_API/              # Web API слой
-│   ├── Controllers/           # REST API контроллеры
-│   ├── Program.cs            # Точка входа и конфигурация
-│   └── appsettings.json       # Настройки приложения
-│
-├── TestTask_Application/      # Слой бизнес-логики
-│   └── Services/             # Сервисы приложения
-│
-├── TestTask_Domain/          # Доменный слой
-│   ├── Entites/              # Доменные сущности
-│   ├── Interfaces/           # Интерфейсы репозиториев
-│   └── ValueObject/          # Value Objects
-│
-├── TestTask_Infrastructure/  # Слой инфраструктуры
-│   ├── Data/                 # DbContext и конфигурация
-│   ├── Repositories/         # Реализация репозиториев
-│   └── Migrations/           # Миграции EF Core
-│
-├── TestTask_Client/          # Frontend приложение
-│   ├── src/
-│   │   ├── components/       # React компоненты
-│   │   ├── services/         # API клиент
-│   │   └── types/            # TypeScript типы
-│   └── package.json
-│
-└── TestTask_ServiceDefaults/ # Общие настройки
+├── TestTask_API/              # REST API
+├── TestTask_Application/      # Бизнес-логика
+├── TestTask_Domain/          # Доменные модели
+├── TestTask_Infrastructure/  # Работа с БД
+├── TestTask_Client/          # React приложение
+└── TestTask_AppHost/         # Aspire (опционально)
 ```
-
----
-
-## 🎯 Демонстрируемые навыки
-
-### Архитектура и паттерны
-- ✅ Clean Architecture
-- ✅ Domain-Driven Design (DDD)
-- ✅ Repository Pattern
-- ✅ Service Layer Pattern
-- ✅ Dependency Injection
-- ✅ Value Objects
-- ✅ Entity Framework Core Configuration
-
-### Backend разработка
-- ✅ ASP.NET Core 9.0
-- ✅ RESTful API Design
-- ✅ Entity Framework Core
-- ✅ SQLite Database
-- ✅ Swagger/OpenAPI
-- ✅ CORS Configuration
-- ✅ Async/Await Patterns
-
-### Frontend разработка
-- ✅ React 19
-- ✅ TypeScript
-- ✅ Modern React Hooks
-- ✅ Component-based Architecture
-- ✅ API Integration
-- ✅ Vite Build System
-
-### Качество кода
-- ✅ Separation of Concerns
-- ✅ SOLID Principles
-- ✅ Type Safety
-- ✅ Error Handling
-- ✅ Code Organization
 
 ---
 
 ## 📝 API Endpoints
 
-### Patients
-- `GET /api/patients` - Получить всех пациентов
-- `GET /api/patients/{id}` - Получить пациента по ID
-- `PATCH /api/patients/{id}/name` - Обновить имя пациента
+- `GET /api/patients` — список пациентов
+- `GET /api/patients/{id}` — пациент по ID
+- `PATCH /api/patients/{id}/name` — обновить имя
+- `GET /api/doctors/specialty/{specialty}` — поиск докторов
+- `GET /api/diseases` — список болезней
 
-### Doctors
-- `GET /api/doctors/specialty/{specialty}` - Поиск докторов по специальности
-
-### Diseases
-- `GET /api/diseases` - Получить все болезни
-
-Документация API доступна через Swagger UI: `/swagger`
+Документация: `http://localhost:5119/swagger`
 
 ---
 
-## 🔮 Возможные улучшения
+## 🎯 Что показывает проект
 
-- [ ] Добавить аутентификацию и авторизацию
-- [ ] Реализовать полный CRUD для всех сущностей
-- [ ] Добавить валидацию на уровне API
-- [ ] Реализовать пагинацию
-- [ ] Добавить unit-тесты
-- [ ] Добавить интеграционные тесты
-- [ ] Реализовать логирование
-- [ ] Добавить обработку ошибок на фронтенде
-- [ ] Реализовать кэширование
-- [ ] Добавить Docker контейнеризацию
+**Архитектура:**
+- Умение правильно разделять код на слои
+- Понимание DDD подходов (Value Objects, Entities)
+- Использование паттернов (Repository, Service Layer)
 
----
+**Backend:**
+- Работа с ASP.NET Core и EF Core
+- Настройка REST API
+- Работа с базой данных
 
-## 📄 Лицензия
+**Frontend:**
+- Современный React с TypeScript
+- Компонентная архитектура
+- Интеграция с API
 
-Этот проект был создан как тестовое задание для демонстрации навыков разработки.
+**Качество кода:**
+- Чистый, читаемый код
+- Правильная организация файлов
+- Типобезопасность
 
 ---
 
@@ -555,9 +347,8 @@ TestTask/
 
 <div align="center">
 
-**Сделано с ❤️ используя Clean Architecture и современные технологии**
+**Сделано с ❤️ используя Clean Architecture**
 
 ⭐ Если проект был полезен, поставьте звезду!
 
 </div>
-
